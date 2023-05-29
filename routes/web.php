@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 
-Route::get('/posts', [PostController::class, 'index']);
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +15,11 @@ Route::get('/posts', [PostController::class, 'index']);
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::get('/', [PostController::class, 'index']);
+Route::get('/reviews/create', [PostController::class, 'create']);
+Route::get('/reviews/{review}', [PostController::class ,'show']);
+Route::post('/reviews', [PostController::class, 'store']);
+// search routes
+Route::get('/search', [PostController::class, 'search'])->name('search');
+Route::get('/search/result', [PostController::class,'result']);
